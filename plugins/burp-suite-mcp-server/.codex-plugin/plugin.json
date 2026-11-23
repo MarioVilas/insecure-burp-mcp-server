@@ -1,7 +1,7 @@
 {
   "name": "burp-suite-mcp-server",
   "version": "1.4.0",
-  "description": "Connect Codex to Burp Suite through the Burp MCP Server extension.",
+  "description": "Connect Codex to Burp Suite through the INSECURE Burp MCP Server extension.",
   "author": {
     "name": "PortSwigger",
     "url": "https://portswigger.net/"

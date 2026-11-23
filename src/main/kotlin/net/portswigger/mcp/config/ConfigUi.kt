@@ -144,7 +144,7 @@ class ConfigUi(private val config: McpConfig, private val providers: List<Provid
                     }
 
                     Dialogs.showMessageDialog(
-                        panel, "Failed to start Burp MCP Server: $friendlyMessage", ERROR_MESSAGE
+                        panel, "Failed to start INSECURE Burp MCP Server: $friendlyMessage", ERROR_MESSAGE
                     )
                 }
             }
@@ -157,13 +157,13 @@ class ConfigUi(private val config: McpConfig, private val providers: List<Provid
         val leftPanel = JPanel(GridBagLayout())
 
         val headerBox = createVerticalBox().apply {
-            add(JLabel("Burp MCP Server").apply {
+            add(JLabel("INSECURE Burp MCP Server").apply {
                 font = Design.Typography.headlineMedium
                 foreground = Design.Colors.onSurface
                 alignmentX = CENTER_ALIGNMENT
             })
             add(createVerticalStrut(Design.Spacing.MD))
-            add(JLabel("Burp MCP Server exposes Burp tooling to AI clients.").apply {
+            add(JLabel("INSECURE Burp MCP Server exposes Burp tooling to AI clients.").apply {
                 font = Design.Typography.bodyLarge
                 foreground = Design.Colors.onSurfaceVariant
                 alignmentX = CENTER_ALIGNMENT

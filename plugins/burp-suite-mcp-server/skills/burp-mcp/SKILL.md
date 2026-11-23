@@ -11,7 +11,7 @@ Proxy history, real Repeater tabs. Treat every call as acting on their live test
 ## Connecting
 
 Burp must be running with the MCP Server extension loaded and **Enabled** ticked in its `MCP` tab.
-The server listens on `http://127.0.0.1:9876` by default (host and port are configurable in the `MCP` tab).
+The server listens on `http://0.0.0.0:9876` by default (host and port are configurable in the `MCP` tab).
 
 Codex connects over Streamable HTTP at `/mcp`. The Burp Suite MCP Server plugin configures this for you. Without
 the plugin, or to use a different host or port, set it in `~/.codex/config.toml`:

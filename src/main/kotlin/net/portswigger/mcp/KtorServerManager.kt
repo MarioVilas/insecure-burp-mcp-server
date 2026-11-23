@@ -46,10 +46,11 @@ class KtorServerManager(private val api: MontoyaApi) : ServerManager {
                     )
                 )
 
-                server = embeddedServer(Netty, port = config.port, host = config.host) {
+                server = embeddedServer(Netty, port = config.port, host = "0.0.0.0") {
                     install(CORS) {
-                        allowHost("localhost:${config.port}")
-                        allowHost("127.0.0.1:${config.port}")
+                        //allowHost("172.25.240.1:${config.port}")
+                        //allowHost("localhost:${config.port}")
+                        //allowHost("127.0.0.1:${config.port}")
 
                         allowMethod(HttpMethod.Get)
                         allowMethod(HttpMethod.Post)
@@ -102,12 +103,13 @@ class KtorServerManager(private val api: MontoyaApi) : ServerManager {
                     }
 
                     // Legacy HTTP+SSE transport at "/", used by the bundled stdio proxy and existing clients.
-                    mcp {
+                    // DNS rebinding protection is disabled so the server accepts any Host header (non-localhost access).
+                    mcp(enableDnsRebindingProtection = false) {
                         mcpServer
                     }
 
                     // Streamable HTTP transport at "/mcp", for clients that do not speak legacy SSE (e.g. Codex).
-                    mcpStreamableHttp(path = STREAMABLE_HTTP_PATH) {
+                    mcpStreamableHttp(path = STREAMABLE_HTTP_PATH, enableDnsRebindingProtection = false) {
                         mcpServer
                     }
 
@@ -151,16 +153,17 @@ class KtorServerManager(private val api: MontoyaApi) : ServerManager {
     }
 
     private fun isValidOrigin(origin: String): Boolean {
-        try {
-            val url = URI(origin).toURL()
-            val hostname = url.host.lowercase()
-
-            val allowedHosts = setOf("localhost", "127.0.0.1")
-
-            return hostname in allowedHosts
-        } catch (_: Exception) {
-            return false
-        }
+        return true
+        //try {
+        //    val url = URI(origin).toURL()
+        //    val hostname = url.host.lowercase()
+        //
+        //    val allowedHosts = setOf("localhost", "127.0.0.1")
+        //
+        //    return hostname in allowedHosts
+        //} catch (_: Exception) {
+        //    return false
+        //}
     }
 
     private fun isBrowserRequest(userAgent: String?): Boolean {
@@ -180,10 +183,10 @@ class KtorServerManager(private val api: MontoyaApi) : ServerManager {
             val hostname = parts[0].lowercase()
             val port = if (parts.size > 1) parts[1].toIntOrNull() else null
 
-            val allowedHosts = setOf("localhost", "127.0.0.1")
-            if (hostname !in allowedHosts) {
-                return false
-            }
+            //val allowedHosts = setOf("localhost", "127.0.0.1")
+            //if (hostname !in allowedHosts) {
+            //    return false
+            //}
 
             if (port != null && port != expectedPort) {
                 return false
@@ -196,15 +199,16 @@ class KtorServerManager(private val api: MontoyaApi) : ServerManager {
     }
 
     private fun isValidReferer(referer: String): Boolean {
-        try {
-            val url = URI(referer).toURL()
-            val hostname = url.host.lowercase()
-
-            val allowedHosts = setOf("localhost", "127.0.0.1")
-            return hostname in allowedHosts
-
-        } catch (_: Exception) {
-            return false
-        }
+        return true
+        //try {
+        //    val url = URI(referer).toURL()
+        //    val hostname = url.host.lowercase()
+        //
+        //    val allowedHosts = setOf("localhost", "127.0.0.1")
+        //    return hostname in allowedHosts
+        //
+        //} catch (_: Exception) {
+        //    return false
+        //}
     }
 }

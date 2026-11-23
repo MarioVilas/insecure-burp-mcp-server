@@ -16,7 +16,7 @@ For more information about the protocol visit: [modelcontextprotocol.io](https:/
 ## Usage
 
 - Install the extension in Burp Suite
-- Configure your Burp MCP server in the extension settings
+- Configure your INSECURE Burp MCP server in the extension settings
 - Configure your MCP client to use the Burp SSE MCP server or stdio proxy
 - Interact with Burp through your client!
 
@@ -79,11 +79,11 @@ The extension has an installer which will automatically configure the client set
    Burp instance,  
    which hosts a web server at a known port (`localhost:9876`).
 
-2. **Configure Claude to use the Burp MCP server**  
+2. **Configure Claude to use the INSECURE Burp MCP server**  
    You can do this in one of two ways:
 
     - **Option 1: Run the installer from the extension**
-      This will add the Burp MCP server to the Claude Desktop config.
+      This will add the INSECURE Burp MCP server to the Claude Desktop config.
 
     - **Option 2: Manually edit the config file**  
       Open the file located at `~/Library/Application Support/Claude/claude_desktop_config.json`,
@@ -97,7 +97,7 @@ The extension has an installer which will automatically configure the client set
                 "-jar",
                 "/path/to/mcp/proxy/jar/mcp-proxy-all.jar",
                 "--sse-url",
-                "<your Burp MCP server URL configured in the extension>"
+                "<your INSECURE Burp MCP server URL configured in the extension>"
             ]
           }
         }

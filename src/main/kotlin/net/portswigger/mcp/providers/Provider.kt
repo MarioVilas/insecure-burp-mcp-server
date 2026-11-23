@@ -62,7 +62,7 @@ class ClaudeDesktopProvider(private val logging: Logging, private val proxyJarMa
         }
         path.writeText(json.encodeToString(JsonObject.serializer(), JsonObject(content)))
 
-        logging.logToOutput("Installed Burp MCP Server to Claude Desktop config")
+        logging.logToOutput("Installed INSECURE Burp MCP Server to Claude Desktop config")
 
         return "Installation successful. Please restart $name if it is currently running."
     }
